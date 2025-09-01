@@ -1,0 +1,179 @@
+.btn-primary {
+    background: #2563eb;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover, .btn-primary:focus {
+    background: #1d4ed8;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+}
+.bg-gray-700:hover, .bg-gray-700:focus {
+    background: #374151;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(55,65,81,0.15);
+}
+.bg-green-600:hover, .bg-green-600:focus {
+    background: #059669;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(16,185,129,0.15);
+}
+
+.video-stream-box {
+    position: relative;
+    min-height: 320px;
+    background: #e0e7ef;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.video-stream-box::before {
+    content: "🎥";
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 2rem;
+    z-index: 20;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.10));
+}
+.video-stream-box::after {
+    content: "🔒";
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 2rem;
+    z-index: 20;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.10));
+}
+
+.chat-container {
+    position: relative;
+}
+.chat-container::before {
+    content: "💬";
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 1.5rem;
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.face-overlay, .face-overlay-live {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.2);
+    pointer-events: none;
+    border: 2px dashed #2563eb;
+    transition: box-shadow 0.2s;
+}
+.face-overlay-live {
+    border: 2px solid #059669;
+    box-shadow: 0 0 12px 2px #05966944;
+}
+.face-overlay.blur {
+    background: rgba(0,0,0,0.2);
+    filter: blur(10px);
+}
+.blur-bg img {
+    filter: blur(10px);
+}
+
+#demo-canvas {
+    z-index: 10;
+    pointer-events: none;
+    display: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+}
+
+#localCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 1rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#chat-messages > div {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 1rem;
+    margin: 2px 0;
+    background: #f3f4f6;
+    color: #22223b;
+    transition: background 0.2s;
+}
+#chat-messages > div.text-right {
+    background: #2563eb;
+    color: #fff;
+    margin-left: auto;
+    margin-right: 0;
+}
+#chat-messages > div.text-right:hover {
+    background: #1d4ed8;
+}
+#chat-messages > div:not(.text-right):hover {
+    background: #e0e7ef;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #2563eb33;
+    transition: box-shadow 0.2s;
+}
+
+#video-upload {
+    border: 2px dashed #2563eb;
+    background: #f1f5f9;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: border 0.2s, background 0.2s;
+}
+#video-upload:hover, #video-upload:focus {
+    border: 2px solid #1d4ed8;
+    background: #e0e7ef;
+}
+
+[style*="aspect-ratio"] {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+[style*="aspect-ratio"] > video,
+[style*="aspect-ratio"] > canvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.nav-link {
+    position: relative;
+    transition: color 0.2s;
+}
+.nav-link:hover, .nav-link:focus {
+    color: #2563eb;
+}
+.nav-link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #2563eb;
+    transition: width 0.2s;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+}
+.nav-link:hover::after, .nav-link:focus::after {
+    width: 100%;
+}
+
+.frosted-bg {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+}
+
+.form-card {
+    background: #f8fafc;
+}

@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Filter Project</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-f0f4f8/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm" id="main-header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-800">Privacy Filter</a>
+            <div class="hidden md:flex space-x-8" id="nav-links">
+                <a href="#" class="nav-link pb-1" onclick="showContent('home')">Home</a>
+                <a href="#" class="nav-link pb-1" onclick="showContent('about')">About</a>
+                <a href="#" class="nav-link pb-1" onclick="showContent('demo')">Filter for Video</a>
+                <a href="#" class="nav-link pb-1" onclick="showContent('stream')">Connect with a Person</a>
+                <a href="#" class="nav-link pb-1" onclick="showContent('vulnerability')">Vulnerabilities</a>
+                <a href="#" class="nav-link pb-1" onclick="showContent('history')">My History</a>
+                <a href="#" class="nav-link pb-1" id="logout-link" style="display:none;">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8 flex items-center justify-center min-h-screen">
+
+        <!-- Login -->
+        <div id="login-container" class="form-container max-w-md mx-auto p-8 form-card rounded-xl shadow-lg text-center">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Welcome Back</h2>
+            <p class="text-gray-600 mb-6">Login to your account to continue.</p>
+            <form id="login-form">
+                <div class="mb-4 text-left">
+                    <label for="login-email" class="block text-gray-700 font-semibold mb-1">Email</label>
+                    <input type="email" id="login-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+                </div>
+                <div class="mb-6 text-left">
+                    <label for="login-password" class="block text-gray-700 font-semibold mb-1">Password</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+                </div>
+                <button type="submit" class="w-full btn-primary text-white py-3 px-6 rounded-lg font-bold shadow-md">Login</button>
+                <p id="login-message" class="mt-4 text-red-500 hidden"></p>
+            </form>
+            <p class="mt-6 text-sm text-gray-600">Don't have an account? 
+                <a href="#" class="text-blue-600 hover:underline font-bold" onclick="showRegister()">Register here</a>
+            </p>
+        </div>
+
+        <!-- Register -->
+        <div id="register-container" class="form-container hidden max-w-md mx-auto p-8 form-card rounded-xl shadow-lg text-center">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Create an Account</h2>
+            <p class="text-gray-600 mb-6">Join us to explore the features.</p>
+            <form id="register-form">
+                <div class="mb-4 text-left">
+                    <label for="register-name" class="block text-gray-700 font-semibold mb-1">Name</label>
+                    <input type="text" id="register-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+                </div>
+                <div class="mb-4 text-left">
+                    <label for="register-email" class="block text-gray-700 font-semibold mb-1">Email</label>
+                    <input type="email" id="register-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+                </div>
+                <div class="mb-6 text-left">
+                    <label for="register-password" class="block text-gray-700 font-semibold mb-1">Password</label>
+                    <input type="password" id="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+                </div>
+                <button type="submit" class="w-full btn-primary text-white py-3 px-6 rounded-lg font-bold shadow-md">Register</button>
+                <p id="register-message" class="mt-4 text-red-500 hidden"></p>
+            </form>
+            <p class="mt-6 text-sm text-gray-600">Already have an account? 
+                <a href="#" class="text-blue-600 hover:underline font-bold" onclick="showLogin()">Login here</a>
+            </p>
+        </div>
+
+        <!-- Main SPA Content -->
+        <div id="main-content" class="main-content hidden w-full frosted-bg">
+
+            <!-- Home Page with small intro section -->
+            <div id="home-page" class="page-content py-20 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">Your Privacy, Your Control.</h1>
+                <div id="user-id-display" class="text-lg text-green-700 font-bold mt-4" style="display:none;"></div>
+                <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Welcome to Privacy Filter. Our real-time face blurring technology keeps you safe in video calls by obfuscating background faces—protect your privacy effortlessly.
+                </p>
+
+                <div class="mt-12 max-w-3xl mx-auto grid md:grid-cols-3 gap-8 text-left text-gray-700">
+                    <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-md transition">
+                        <h2 class="text-xl font-semibold mb-2">1. Start Your Video</h2>
+                        <p>Securely start your webcam and join others seamlessly.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-md transition">
+                        <h2 class="text-xl font-semibold mb-2">2. Connect with Peers</h2>
+                        <p>Connect to friends or colleagues by their unique user ID.</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-md transition">
+                        <h2 class="text-xl font-semibold mb-2">3. Stay Private</h2>
+                        <p>Enjoy live privacy filters and chat with confidence.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="#" class="btn-primary text-white font-bold py-3 px-6 rounded-lg shadow-md" onclick="showContent('stream')">Get Started</a>
+                    <a href="#" class="bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gray-400 transition duration-300" onclick="showContent('about')">Learn More</a>
+                </div>
+            </div>
+
+
+            <!-- Demo Page: Video Face Blur -->
+            <div id="demo-page" class="page-content hidden py-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold">Demo: Blur Faces in Video</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Upload a video and blur the faces of background people automatically.</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-gray-50 rounded-lg shadow p-8">
+                    <form id="video-upload-form" class="mb-6">
+                        <label for="video-upload" class="block font-semibold mb-2">Select a video file:</label>
+                        <input type="file" id="video-upload" name="video" accept="video/*" class="w-full mb-4" required />
+                        <button type="button" id="start-blur-btn" class="btn-primary text-white px-6 py-2 rounded font-bold shadow mr-2" disabled>Start Blur</button>
+                        <button type="button" id="stop-blur-btn" class="bg-gray-400 text-white px-6 py-2 rounded font-bold shadow mr-2" disabled>Stop</button>
+                        <button type="button" id="download-blur-btn" class="bg-green-600 text-white px-6 py-2 rounded font-bold shadow" disabled>Download</button>
+                    </form>
+                    <div class="relative aspect-video mb-4">
+                        <video id="demo-video" controls class="rounded w-full h-full" style="background:#222;max-height:320px;"></video>
+                        <canvas id="demo-canvas" class="absolute top-0 left-0 w-full h-full" style="display:none;"></canvas>
+                    </div>
+                    <p class="text-gray-500 text-sm">Only background faces will be blurred. The largest face is considered the main subject.</p>
+                </div>
+            </div>
+
+            <!-- Stream Page -->
+            <div id="stream-page" class="page-content hidden py-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Connect with a Person</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Real-time peer-to-peer calling with unique IDs.</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+                    <div class="flex-1 space-y-4">
+                        <div class="video-stream-box relative h-64">
+                            <video id="localVideo" autoplay muted playsinline class="rounded-lg absolute w-1/2 h-full top-0 left-0"></video>
+                            <canvas id="localCanvas" class="rounded-lg absolute w-1/2 h-full top-0 left-0 pointer-events-none" style="display:none"></canvas>
+                            <video id="remoteVideo" autoplay playsinline class="rounded-lg absolute w-1/2 h-full top-0 right-0"></video>
+                        </div>
+                        <div class="video-controls flex flex-col gap-4 mt-4 max-w-md">
+                            <button id="start-local-video-btn" class="btn-primary text-white font-bold py-3 px-6 rounded-lg shadow-md">Start Video</button>
+                            <div class="flex items-center gap-2">
+                                <label for="call-to-id-input" class="font-semibold">Call User ID:</label>
+                                <input id="call-to-id-input" type="text" placeholder="Enter user ID" class="border px-2 py-1 rounded flex-grow" />
+                                <button id="call-btn" disabled class="btn-primary px-4 py-2 rounded shadow">Call</button>
+                            </div>
+                            <p id="your-id-display" class="text-sm font-medium text-gray-700"></p>
+                            <h3 class="mt-4 font-semibold">Online Users:</h3>
+                            <ul id="users-list" class="list-disc list-inside max-h-40 overflow-auto border rounded p-2"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Vulnerabilities Page -->
+            <div id="vulnerability-page" class="page-content hidden py-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold">Vulnerabilities & Resolutions</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">A list of potential security vulnerabilities in this project and how to resolve them.</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-red-50 border border-red-200 rounded-lg shadow p-6 mb-8">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-red-100">
+                                <th class="p-2 border-b font-semibold">Vulnerability</th>
+                                <th class="p-2 border-b font-semibold">Resolution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border-b"><b>File Upload Risks</b><br>Malicious or oversized files may be uploaded.</td>
+                                <td class="p-2 border-b">Validate file type and size on both client and server. Reject non-video files and limit file size.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Denial of Service (DoS)</b><br>Large or repeated uploads can exhaust resources.</td>
+                                <td class="p-2 border-b">Set file size limits, rate-limit uploads, and monitor resource usage.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Third-Party Library Vulnerabilities</b></td>
+                                <td class="p-2 border-b">Keep all dependencies (e.g., TensorFlow.js) up to date and monitor for security advisories.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Cross-Site Scripting (XSS)</b><br>User-supplied data in UI.</td>
+                                <td class="p-2 border-b">Escape or sanitize all user input before displaying it in the UI.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Information Disclosure</b><br>Unauthorized access to stored videos.</td>
+                                <td class="p-2 border-b">Store videos securely and restrict access to authenticated/authorized users only.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Unencrypted Communication</b></td>
+                                <td class="p-2 border-b">Use HTTPS for all data transfers, including uploads and downloads.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Client-Side Privacy</b><br>Face blurring may not be perfect.</td>
+                                <td class="p-2 border-b">Inform users of limitations and encourage manual review of processed videos.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border-b"><b>Authentication/Authorization</b></td>
+                                <td class="p-2 border-b">Implement strong authentication and authorization for all sensitive actions and data.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- About Page -->
+            <div id="about-page" class="page-content hidden py-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold">About Privacy Filter</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Protecting your privacy in every video call and upload.</p>
+                </div>
+                <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+                    <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border-t-4 border-blue-500 flex flex-col items-center">
+                        <div class="mb-4 text-5xl">🔒</div>
+                        <h3 class="text-xl font-bold mb-2 text-blue-700">Privacy First</h3>
+                        <p class="text-gray-600">Automatically blurs faces in the background of your videos, so your friends, family, or colleagues stay private—even in busy places.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border-t-4 border-green-500 flex flex-col items-center">
+                        <div class="mb-4 text-5xl">🤖</div>
+                        <h3 class="text-xl font-bold mb-2 text-green-700">AI-Powered</h3>
+                        <p class="text-gray-600">Uses advanced AI (BlazeFace & TensorFlow.js) to detect and blur faces in real time—no special hardware or software needed.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border-t-4 border-purple-500 flex flex-col items-center">
+                        <div class="mb-4 text-5xl">⚡</div>
+                        <h3 class="text-xl font-bold mb-2 text-purple-700">Fast & Easy</h3>
+                        <p class="text-gray-600">Works instantly in your browser. Just upload a video or start a call—no installation, no waiting, just privacy.</p>
+                    </div>
+                </div>
+                <div class="mt-12 text-center">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-800">How It Works</h4>
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                        <div class="flex flex-col items-center">
+                            <span class="text-4xl mb-2">📹</span>
+                            <span class="text-gray-700">Upload or stream your video</span>
+                        </div>
+                        <span class="text-3xl text-blue-400">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-4xl mb-2">🧑‍💻</span>
+                            <span class="text-gray-700">AI detects all faces</span>
+                        </div>
+                        <span class="text-3xl text-blue-400">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-4xl mb-2">🌫️</span>
+                            <span class="text-gray-700">Background faces are blurred</span>
+                        </div>
+                        <span class="text-3xl text-blue-400">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-4xl mb-2">✅</span>
+                            <span class="text-gray-700">Your privacy is protected!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Privacy Filter Project. A conceptual SPA demonstrating a privacy solution.</p>
+        </div>
+    </footer>
+
+    <!-- External libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.min.js"></script>
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js" crossorigin="anonymous"></script>
+
+    <!-- Your custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
