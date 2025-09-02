@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "backend/index.js",
   "scripts": {
-    "start": "node backend/index.js"
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "nodemon": "^2.0.22"
   }
 }
